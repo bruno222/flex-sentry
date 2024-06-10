@@ -20,6 +20,10 @@ export const startSentry = () => {
       }),
     ],
 
+    // OfflineCaching
+    // https://docs.sentry.io/platforms/javascript/guides/react/best-practices/offline-caching/
+    transport: Sentry.makeBrowserOfflineTransport(Sentry.makeFetchTransport),
+
     // We recommend adjusting this value in production, or using tracesSampler
     // for finer control
     tracesSampleRate: 1.0,
