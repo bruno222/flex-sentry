@@ -3,7 +3,7 @@ import * as Flex from '@twilio/flex-ui';
 import { FlexPlugin } from '@twilio/flex-plugin';
 
 import CustomTaskList from './components/CustomTaskList/CustomTaskList';
-import { sentrySetUser } from './sentry';
+import { startSentry } from './sentry';
 
 const PLUGIN_NAME = 'FlexSentryPlugin';
 
@@ -20,7 +20,7 @@ export default class FlexSentryPlugin extends FlexPlugin {
    */
   async init(flex: typeof Flex, manager: Flex.Manager): Promise<void> {
     const agentEmail = manager!.workerClient!.attributes.email;
-    sentrySetUser(agentEmail);
+    startSentry(agentEmail, Flex.VERSION);
 
     const options: Flex.ContentFragmentProps = { sortOrder: -1 };
     flex.AgentDesktopView.Panel1.Content.add(<CustomTaskList key='FlexSentryPlugin-component2' />, options);

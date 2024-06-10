@@ -2,7 +2,7 @@ import { createBrowserHistory } from 'history';
 
 import * as Sentry from '@sentry/react';
 
-export const startSentry = () => {
+export const startSentry = (email: string, flexVersion: string) => {
   const history = createBrowserHistory();
 
   // Array of Route Config Objects
@@ -27,9 +27,11 @@ export const startSentry = () => {
     // We recommend adjusting this value in production, or using tracesSampler
     // for finer control
     tracesSampleRate: 1.0,
-  });
-};
 
-export const sentrySetUser = (email: string) => {
-  email && Sentry.setUser({ email });
+    // Get info about Flex and about the Agent
+    initialScope: {
+      tags: { flexVersion },
+      user: { email },
+    },
+  });
 };
