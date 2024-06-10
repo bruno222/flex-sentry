@@ -9,15 +9,16 @@ const CustomTaskList = (): JSX.Element | null => {
   if (!isOpen) {
     return null;
   }
-  
-  const dismiss = () => setIsOpen(false);
-  
+
+  // const dismiss = () => setIsOpen(false);
+  const dismiss = () => {
+    throw new Error('Sentry error -> ' + new Date().toISOString());
+  };
+
   return (
-    <Theme.Provider theme="default">
-      <Alert onDismiss={dismiss} variant="neutral">
-        <Text as="div">
-          This is a dismissible demo component.
-        </Text>
+    <Theme.Provider theme='default'>
+      <Alert onDismiss={dismiss} variant='neutral'>
+        <Text as='div'>This is where Sentry is installed</Text>
       </Alert>
     </Theme.Provider>
   );
