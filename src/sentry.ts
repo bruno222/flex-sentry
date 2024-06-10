@@ -25,3 +25,7 @@ export const startSentry = () => {
     tracesSampleRate: 1.0,
   });
 };
+
+export const sentrySetUser = (email: string) => {
+  email && Sentry.setUser({ email });
+};
