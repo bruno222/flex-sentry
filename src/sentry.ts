@@ -18,7 +18,11 @@ export const startSentry = (email: string, flexVersion: string) => {
         routes,
         // matchPath,
       }),
+      Sentry.replayIntegration(),
     ],
+    replaysSessionSampleRate: 0.1, // overall replay sampling
+    replaysOnErrorSampleRate: 1.0, // sampling on errors 
+
 
     // OfflineCaching
     // https://docs.sentry.io/platforms/javascript/guides/react/best-practices/offline-caching/
