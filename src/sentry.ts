@@ -18,11 +18,7 @@ export const startSentry = (email: string, flexVersion: string) => {
         routes,
         // matchPath,
       }),
-      Sentry.replayIntegration(),
-      Sentry.feedbackIntegration({
-      // Additional SDK configuration goes in here, for example:
-      colorScheme: "system",
-    }),
+      Sentry.replayIntegration()
     ],
     replaysSessionSampleRate: 0.1, // overall replay sampling
     replaysOnErrorSampleRate: 1.0, // sampling on errors 
@@ -42,4 +38,21 @@ export const startSentry = (email: string, flexVersion: string) => {
       user: { email },
     },
   });
+
+  createFeedbackWidget();
 };
+
+/**
+ * Alternative way to create the Feedback Widget, as the previous way 
+ * was not working as expected, Flex was replacing the Sentry widget with its own.
+ */
+function createFeedbackWidget() {
+  const feedback = Sentry.feedbackIntegration({    
+    autoInject: false,
+  });
+  
+  setTimeout(() => {
+    console.log('Rendering Sentry Feedback Widget...');
+    const widget = feedback.createWidget();      
+  }, 5000);
+}
